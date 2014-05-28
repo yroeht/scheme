@@ -1,5 +1,7 @@
 ; Necessary for string-downcase
-(require-extension srfi-13)
+(use srfi-13)
+; Necessary for sort
+(use data-structures)
 
 (define (is-anagram word1 word2)
   (apply string=?
