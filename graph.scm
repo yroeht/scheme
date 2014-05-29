@@ -49,7 +49,7 @@
       ; is the search over, or shall we iterate again?
       (cond
         ; the target as found. Backtrack using the predecessors associations.
-        ((eq? node goal) 
+        ((equal? node goal)
          (let backtrack ((node (car visited)))
            (cons (car node) 
                  (if (null? (cdr node))
