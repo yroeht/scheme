@@ -2,6 +2,7 @@
   (let ((front '()) (back '()))
     (lambda (cmd . element)
       (case cmd
+        ('has (or (member (car element) front) (member (car element) back)))
         ('push (set! back (cons (car element) back)))
         ('peek (car back))
         ('empty (and (null? front) (null? back)))
