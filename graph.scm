@@ -28,22 +28,22 @@
       graph)
     ; return the order in which the nodes were visited
     visited))
-(display (reverse (dfs graph-b)))
-(newline)
+
+;(display (reverse (dfs graph-b)))
 
 (define (bfs graph start goal)
-  (let ((visited '())
+  (let ((visited (list (cons start '())))
         (q (make-queue)))
     (let loop  ((node start)
                 (from '()))
-      ; mark current vertice as visited. Associate it with its parent, which
-      ; was passed as an argument.
-      (set! visited (cons (cons node from) visited))
-      ; enqueue adjacent vertices. Associate them with the current node, their
-      ; predecessor, for future reference.
       (for-each
         (lambda (adj)
           (cond ((not (assoc adj visited))
+                 ; mark current vertice as visited. Associate it with its
+                 ; parent, which was passed as an argument.
+                 (set! visited (cons (cons adj node) visited))
+                 ; enqueue adjacent vertices. Associate them with the current
+                 ; node, their predecessor, for future reference.
                  (q 'push (cons adj node)))))
         (cadr (assoc node graph)))
       ; is the search over, or shall we iterate again?
@@ -61,4 +61,13 @@
          (loop (car next-and-from)
                (cdr next-and-from)))))))
 
-(display (reverse (bfs graph-b 'H 'E)))
+(define (dump-graph graph)
+  (for-each
+    (lambda (p)
+      (display (car p))
+      (display " ---> ")
+      (display (cdr p))
+      (newline))
+    graph))
+
+;(display (reverse (bfs graph-b 'H 'E)))
