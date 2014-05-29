@@ -51,7 +51,7 @@
         ; the target as found. Backtrack using the predecessors associations.
         ((equal? node goal)
          (let backtrack ((node (car visited)))
-           (cons (car node) 
+           (cons (car node)
                  (if (null? (cdr node))
                    '()
                    (backtrack (assoc (cdr node) visited))))))
